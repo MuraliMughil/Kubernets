@@ -1,0 +1,30 @@
+
+Step 1: Rewrite the Repository File (Removing the strict exclusion rule)
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+EOF
+
+
+
+Step 2: Clean the Cache and Install Components
+
+# Clean cached repository data
+dnf clean all
+
+# Re-run the installation
+dnf install -y kubelet kubeadm kubectl
+
+# Enable the system agent background service
+systemctl enable --now kubelet
+
+
+Step 3: Run the Verification Checks Again
+
+kubeadm version
+kubectl version --client
+systemctl status kubelet

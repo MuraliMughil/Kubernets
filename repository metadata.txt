@@ -29,4 +29,12 @@ kubeadm version
 kubectl version --client
 systemctl status kubelet
 
+
+sudo dnf install -y conntrack-tools iproute-tc
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/calico.yaml
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=<private_IP>
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+

@@ -1,4 +1,5 @@
 #!/bin/bash
+dnf install -y conntrack-tools iproute-tc
 
 # 1. Disable swap (EC2 usually has it disabled by default, but verify)
 swapoff -a

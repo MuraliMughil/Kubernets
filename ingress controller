@@ -1,0 +1,10 @@
+1. Install ingress-nginx
+Run this from your control-plane node:
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.3/deploy/static/provider/baremetal/deploy.yaml
+This installs the ingress-nginx controller and its required resources.
+
+2. Verify the controller
+kubectl get pods -n ingress-nginx
+
+kubectl get svc -n ingress-nginx
